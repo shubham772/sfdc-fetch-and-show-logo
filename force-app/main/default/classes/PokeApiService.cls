@@ -41,7 +41,7 @@ public class PokeApiService {
         Http http = new Http();
         HttpRequest request = new HttpRequest();
         // Fetching the first 100 Pokemon
-        request.setEndpoint('https://pokeapi.co/api/v2/pokemon?limit=100');
+        request.setEndpoint('https://pokeapi.co/api/v2/pokemon?limit=200');
         request.setMethod('GET');
         
         List<Map<String, String>> options = new List<Map<String, String>>();
