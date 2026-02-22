@@ -66,7 +66,7 @@ Before deploying, you must whitelist the API endpoints in Salesforce:
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/Simple-INtegration-call-to-fetch-image-and-show-as-logo.git
+git clone https://github.com/your-username/sfdc-fetch-and-show-logo.git
 
 # Deploy to your org
 sf project deploy start
