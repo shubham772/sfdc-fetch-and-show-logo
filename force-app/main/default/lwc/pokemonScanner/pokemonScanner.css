@@ -1,0 +1,43 @@
+.pokemon-card {
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    border: 4px solid #3b4cca;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    max-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.pokemon-card:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.pokemon-sprite {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.capitalize {
+    text-transform: capitalize;
+    font-weight: bold;
+    color: #ffde00;
+    -webkit-text-stroke: 1px #3b4cca; /* Pokemon Gold/Blue style */
+}
+
+/* Bounce animation for the sprite */
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.progress-container {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+}

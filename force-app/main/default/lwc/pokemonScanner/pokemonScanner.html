@@ -1,0 +1,30 @@
+<template>
+    <lightning-card title="Poke-Dex Scanner" icon-name="standard:search">
+        <div class="slds-var-m-around_medium">
+            <div class="slds-grid slds-gutters slds-var-m-bottom_medium">
+                <div class="slds-col slds-size_2-of-3">
+                    <lightning-input type="search" label="Enter Pokemon Name" onchange={handleNameChange} value={pokemonName}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-align-bottom">
+                    <lightning-button variant="brand" label="Scan" onclick={handleSearch} class="slds-var-m-left_x-small"></lightning-button>
+                </div>
+            </div>
+
+            <template if:true={pokemonData}>
+                <div class="pokemon-card slds-align_absolute-center">
+                    <div class="card-content">
+                        <img src={pokemonData.image} alt={pokemonData.name} class="pokemon-sprite animate-bounce">
+                        <h2 class="slds-text-heading_large slds-text-align_center capitalize">{pokemonData.name}</h2>
+                        
+                        <div class="stats slds-var-p-around_small">
+                            <p>Weight: {pokemonData.weight}kg</p>
+                            <div class="progress-container">
+                                <div class="progress-bar" style={calculateWidth}></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
