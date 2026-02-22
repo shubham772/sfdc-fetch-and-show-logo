@@ -1,30 +1,38 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
+import getPokemonList from '@salesforce/apex/PokeApiService.getPokemonList';
 import getPokemonData from '@salesforce/apex/PokeApiService.getPokemonData';
 
 export default class PokemonScanner extends LightningElement {
-    @track pokemonName = 'pikachu';
+    @track pokemonOptions = [];
+    @track selectedPokemon = '';
     @track pokemonData;
-    @track error;
+    @track isLoading = false;
 
-    handleNameChange(event) {
-        this.pokemonName = event.target.value;
+    // Load the dropdown list on startup
+    @wire(getPokemonList)
+    wiredPokemon({ error, data }) {
+        if (data) {
+            this.pokemonOptions = data;
+        } else if (error) {
+            console.error(error);
+        }
     }
 
-    handleSearch() {
-        getPokemonData({ pokemonName: this.pokemonName })
+    handleDropdownChange(event) {
+        this.selectedPokemon = event.detail.value;
+        this.fetchDetails();
+    }
+
+    fetchDetails() {
+        this.isLoading = true;
+        getPokemonData({ pokemonName: this.selectedPokemon })
             .then((result) => {
                 this.pokemonData = result;
-                this.error = undefined;
+                this.isLoading = false;
             })
             .catch((error) => {
-                this.error = error.body.message;
-                this.pokemonData = undefined;
+                console.error(error);
+                this.isLoading = false;
             });
-    }
-
-    // Dynamic style for a "power bar" based on weight
-    get calculateWidth() {
-        let width = this.pokemonData.weight > 100 ? 100 : this.pokemonData.weight;
-        return `width: ${width}%; background-color: #ffcc00; height: 10px; border-radius: 5px;`;
     }
 }
